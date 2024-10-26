@@ -45,8 +45,17 @@ const loadImage = function (src) {
 
 // Converts each pixel to grayscale
 const convertPixelsToGrayscale = function (data) {
+  // slightly different from ordinary average
+  // It takes into account, that human eye
+  // is better at recognising green color
+  const redConst = 0.299;
+  const greenConst = 0.587;
+  const blueConst = 0.114;
+
+  // Convert all pixels
   for (let i = 0; i < data.length; i += 4) {
-    const value = data[i] * 0.299 + data[i + 1] * 0.587 + data[i + 2] * 0.114;
+    const value =
+      data[i] * redConst + data[i + 1] * greenConst + data[i + 2] * blueConst;
     data[i] = value; // red
     data[i + 1] = value; // green
     data[i + 2] = value; // blue
